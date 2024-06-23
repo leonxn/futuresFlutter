@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:futuresflutter/models/pendiente_model.dart';
 import 'package:futuresflutter/models/profile_model.dart';
 import 'package:futuresflutter/models/social_model.dart';
@@ -23,6 +24,22 @@ class _PerfilState extends State<Perfil> {
     // getData();
     // TODO: implement initState
     super.initState();
+  }
+
+  void _snackbar(
+      BuildContext context, String textNotificacion, Color? colorNotificacion) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          textNotificacion,
+          style: TextStyle(
+            fontSize: 20,
+          ),
+        ),
+        backgroundColor: colorNotificacion,
+        duration: Duration(milliseconds: 500),
+      ),
+    );
   }
 
   @override
@@ -261,11 +278,25 @@ class _PerfilState extends State<Perfil> {
                                     ],
                                   ),
                                 ),
-                                Icon(
-                                  Icons.check_circle,
-                                  color: e.statusPendiente == true
-                                      ? Colors.green
-                                      : Colors.grey,
+                                GestureDetector(
+                                  onTap: () {
+                                    if (e.statusPendiente == true) {
+                                      _snackbar(context, "Tarea no cumplida",
+                                          Colors.grey);
+                                      e.statusPendiente = false;
+                                    } else {
+                                      _snackbar(context, "Tarea Cumplida",
+                                          Colors.green);
+                                      e.statusPendiente = true;
+                                    }
+                                    setState(() {});
+                                  },
+                                  child: Icon(
+                                    Icons.check_circle,
+                                    color: e.statusPendiente == true
+                                        ? Colors.green
+                                        : Colors.grey,
+                                  ),
                                 ),
                               ],
                             ),
