@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:futuresflutter/models/pendiente_model.dart';
 import 'package:futuresflutter/models/profile_model.dart';
 import 'package:futuresflutter/models/social_model.dart';
